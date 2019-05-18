@@ -19,25 +19,6 @@ RP_ORDER = [
     "rp-claims_request", "rp-request_uri", "rp-scope", "rp-nonce",
     "rp-key-rotation", "rp-userinfo", "rp-self-issued", "rp-claims"]
 
-# OP_ORDER = [
-#     "OP-Response",
-#     "OP-IDToken",
-#     "OP-UserInfo",
-#     "OP-nonce",
-#     "OP-scope",
-#     "OP-display",
-#     "OP-prompt",
-#     "OP-Req",
-#     "OP-OAuth",
-#     "OP-redirect_uri",
-#     "OP-ClientAuth",
-#     "OP-Discovery",
-#     "OP-Registration",
-#     "OP-Rotation",
-#     "OP-request_uri",
-#     "OP-request",
-#     "OP-claims"
-# ]
 
 OP_ORDER = [
     "Response Type & Response Mode",
@@ -62,11 +43,10 @@ OP_ORDER = [
     "OAuth behaviors",
     "Key Rotation",
     "End Session",
-    "Session Management",
     "RP Initiated Logout",
-    "Back Channel Logout - RP Initiated",
-    "Front Channel Logout - RP Initiated",
-    "Session management - RP Initiated Logout"
+    "Back Channel Logout",
+    "Front Channel Logout",
+    "Session Management"
 ]
 
 

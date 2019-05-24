@@ -43,9 +43,9 @@ OP_ORDER = [
     "OAuth behaviors",
     "Key Rotation",
     "End Session",
-    "RP Initiated Logout",
-    "Back Channel Logout",
-    "Front Channel Logout",
+    "RP-Initiated Logout",
+    "Back-Channel Logout",
+    "Front-Channel Logout",
     "Session Management"
 ]
 

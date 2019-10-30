@@ -2,8 +2,8 @@ import os
 
 from future.backports.urllib.parse import quote_plus
 
-from otest.utils import with_or_without_slash
 from otest.time_util import in_a_while
+from otest.utils import with_or_without_slash
 
 RESPONSE = 0
 WEBFINGER = 1
@@ -12,9 +12,10 @@ REGISTER = 3
 CRYPTO = 4
 EXTRAS = 5
 FORMPOST = 6
+SESSION = 7
 
 LABEL = ['return_type', 'webfinger', 'discover', 'register', 'crypto',
-         'extra', "form_post"]
+         'extra', "form_post", "logout"]
 
 __author__ = 'roland'
 
@@ -22,9 +23,15 @@ EMAP = {'s': 'sig', 'n': 'none', 'e': 'enc'}
 EKEYS = list(EMAP.keys())
 EKEYS.sort()  # Make the result deterministic
 
+SEMAP = {'f': "front", "b": "back", "s": "session", "r": "rp_init"}
+SKEYS = list(SEMAP.keys())
+SKEYS.sort()
+
 PKEYS = LABEL[:]
 PKEYS.remove('crypto')
 PKEYS.extend(list(EMAP.values()))
+PKEYS.remove('logout')
+PKEYS.extend(list(SEMAP.values()))
 
 RT = {"C": "code", "I": "id_token", "T": "token", "CT": "code token",
       'CI': 'code id_token', 'IT': 'id_token token',
@@ -37,9 +44,11 @@ REG = {"T": "dynamic", "F": "static"}
 CR = {"n": "none", "s": "sign", "e": "encrypt"}
 EX = {"+": "extras"}
 FP = {'T': 'form_post'}
+SE = {'f': "frontchannel-logout", "b": "backchannel-logout", "s": "session_management",
+      "r": "rp-initiated-logout"}
 
 ATTR = ["return_type", "webfinger", "openid-configuration", "registration",
-        "crypto", "extras", "form_post"]
+        "crypto", "extras", "form_post", "logout"]
 
 
 def simplify_return_type(spec):
@@ -107,6 +116,14 @@ def from_profile(code):
             if len(p) > FORMPOST:
                 if 'T' in p[FORMPOST]:
                     _prof['form_post'] = True
+
+                if len(p) > SESSION:
+                    if len(p[SESSION]) and 'r' not in p[SESSION]:
+                        _prof[SEMAP['r']] = True
+
+                    for k, v in SEMAP.items():
+                        if k in p[SESSION]:
+                            _prof[v] = True
 
     return _prof
 

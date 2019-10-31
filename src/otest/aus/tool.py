@@ -1,5 +1,4 @@
 import logging
-# from urllib.parse import parse_qs
 
 import cherrypy
 from future.backports.urllib.parse import quote_plus
@@ -24,6 +23,8 @@ from otest.prof_util import to_profile
 from otest.result import Result
 from otest.result import safe_path
 from otest.verify import Verify
+
+# from urllib.parse import parse_qs
 
 __author__ = 'roland'
 
@@ -160,7 +161,8 @@ class WebTester(Tester):
             old = from_profile(self.sh.profile)
 
             new = from_profile(to_profile(info))
-            for attr in ['enc', 'extra', 'none', 'return_type', 'sig', 'form_post']:
+            for attr in ['enc', 'extra', 'none', 'return_type', 'sig', 'form_post',
+                         "front", "back", "session", "rp_init"]:
                 old[attr] = new[attr]
 
             # Store new configuration
@@ -255,7 +257,7 @@ class WebTester(Tester):
             cls = item
             funcs = {}
 
-        if isinstance(item, Done): # I'm completely out of wack
+        if isinstance(item, Done):  # I'm completely out of wack
             raise OutOfSync()
 
         _line = "<--<-- {} --- {} -->-->".format(index, cls.__name__)

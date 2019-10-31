@@ -95,7 +95,11 @@ def from_profile(code):
              "sig": True,
              'enc': False,
              'none': False,
-             'form_post': False}
+             'form_post': False,
+             "front": False,
+             "back": False,
+             "session": False,
+             "rp_init": False}
 
     for x, y in {WEBFINGER: 'webfinger', DISCOVER: 'discover',
                  REGISTER: 'register'}.items():

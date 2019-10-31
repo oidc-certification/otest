@@ -1,3 +1,7 @@
+from otest.prof_util import SEMAP
+
+from otest.prof_util import SESSION
+
 from otest.aus.preproc import PMAP
 from otest.prof_util import CRYPTO
 from otest.prof_util import EMAP
@@ -8,7 +12,9 @@ PMAPL = list(PMAP.keys())
 PMAPL.sort()
 
 L2I = {"discovery": 1, "registration": 2}
-LONG_NAMES = {"none": "none", "sig": "signing", "enc": "encryption"}
+LONG_NAMES = {"none": "none", "sig": "signing", "enc": "encryption",
+              "front": "frontchannel logout", "back": "backchannel logout",
+              "session": 'session management'}
 
 RADIO = '<div class="radio"><label><input type="radio" name="{}" value="{}">{}</label></div>'
 RADIO_C = '<div class="radio"><label><input type="radio" name="{}" value="{}" checked>{}</label></div>'
@@ -51,6 +57,19 @@ def profile_form(prof):
         vs = ''
 
     for code, attr in EMAP.items():
+        if code in vs:
+            el.append(CHECK_C.format(attr, LONG_NAMES[attr]))
+        else:
+            el.append(CHECK.format(attr, LONG_NAMES[attr]))
+    el.append("</p>")
+
+    el.append("</ul><p>Session management and logout support:<br>")
+    if len(p) > SESSION:
+        vs = p[SESSION]
+    else:
+        vs = ''
+
+    for code, attr in SEMAP.items():
         if code in vs:
             el.append(CHECK_C.format(attr, LONG_NAMES[attr]))
         else:

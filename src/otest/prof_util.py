@@ -92,7 +92,7 @@ def from_profile(code):
 
     _prof = {"return_type": p[RESPONSE],
              "extra": False,
-             "sig": True,
+             "sig": False,
              'enc': False,
              'none': False,
              'form_post': False,
@@ -146,6 +146,17 @@ def to_profile(pdict):
 
     # Do the rest backwards
     tail = []
+    slo = ''
+    for k in SKEYS:
+        try:
+            if pdict[SEMAP[k]]:
+                slo += k
+        except KeyError:
+            pass
+
+    if slo:
+        tail.append(slo)
+
     for typ, val in [('form_post', 'T'), ('extra', '+')]:
         try:
             _fp = pdict[typ]

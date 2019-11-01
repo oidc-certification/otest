@@ -6,43 +6,68 @@ from otest.prof_util import to_profile
 TESTS = {
     'C.T.T.T': {'extra': False, 'enc': False, 'webfinger': True,
                 'return_type': 'C', 'sig': False, 'none': False,
-                'register': True, 'discover': True, 'form_post': False},
+                'register': True, 'discover': True, 'form_post': False,
+                'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T..+': {'extra': True, 'enc': False, 'webfinger': True,
                    'return_type': 'C', 'sig': False, 'none': False,
-                   'register': True, 'discover': True, 'form_post': False},
+                   'register': True, 'discover': True, 'form_post': False,
+                   'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T.e.+': {'extra': True, 'enc': True, 'webfinger': True,
                     'return_type': 'C', 'sig': False, 'none': False,
-                    'register': True, 'discover': True, 'form_post': False},
+                    'register': True, 'discover': True, 'form_post': False,
+                    'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T...T': {'extra': False, 'enc': False, 'webfinger': True,
                     'return_type': 'C', 'sig': False, 'none': False,
-                    'register': True, 'discover': True, 'form_post': True},
+                    'register': True, 'discover': True, 'form_post': True,
+                    'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T.ens': {'extra': False, 'enc': True, 'webfinger': True,
                     'return_type': 'C', 'sig': True, 'none': True,
-                    'register': True, 'discover': True, 'form_post': False},
+                    'register': True, 'discover': True, 'form_post': False,
+                    'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T.es': {'extra': False, 'enc': True, 'webfinger': True,
                    'return_type': 'C', 'sig': True, 'none': False,
-                   'register': True, 'discover': True, 'form_post': False},
+                   'register': True, 'discover': True, 'form_post': False,
+                   'front': False, "back": False, "session": False, "rp_init": False},
     'C.T.T.T.s': {'extra': False, 'enc': False, 'webfinger': True,
                   'return_type': 'C', 'sig': True, 'none': False,
-                  'register': True, 'discover': True, 'form_post': False},
+                  'register': True, 'discover': True, 'form_post': False,
+                  'front': False, "back": False, "session": False, "rp_init": False},
     'CIT.F.F.F.s': {'extra': False, 'enc': False, 'webfinger': False,
                     'return_type': 'CIT', 'sig': True, 'none': False,
-                    'register': False, 'discover': False, 'form_post': False},
+                    'register': False, 'discover': False, 'form_post': False,
+                    'front': False, "back": False, "session": False, "rp_init": False},
     'I.F.T.F': {'extra': False, 'enc': False, 'webfinger': False,
                 'return_type': 'I', 'sig': False, 'none': False,
-                'register': False, 'discover': True, 'form_post': False},
+                'register': False, 'discover': True, 'form_post': False,
+                'front': False, "back": False, "session": False, "rp_init": False},
     'I.T.T.T': {'extra': False, 'enc': False, 'webfinger': True,
                 'return_type': 'I', 'sig': False, 'none': False,
-                'register': True, 'discover': True, 'form_post': False}
+                'register': True, 'discover': True, 'form_post': False,
+                'front': False, "back": False, "session": False, "rp_init": False},
+    'C.T.T.T.ens..T.bfrs': {'extra': False, 'enc': True, 'webfinger': True,
+                            'return_type': 'C', 'sig': True, 'none': True,
+                            'register': True, 'discover': True, 'form_post': True,
+                            'front': True, "back": True, "session": True, "rp_init": True},
 }
 
 TKEYS = list(TESTS.keys())
 
 
+def cmp_dict(a, b):
+    if set(a.keys()) != set(b.keys()):
+        return False
+
+    for attr, val in a.items():
+        if val != b[attr]:
+            return False
+
+    return True
+
+
 def test_from_to_code():
     for ex, val in TESTS.items():
         f = from_profile(ex)
-        assert f == val
+        assert cmp_dict(f,val)
         t = to_profile(f)
         assert t == ex
 

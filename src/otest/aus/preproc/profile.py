@@ -14,7 +14,7 @@ PMAPL.sort()
 L2I = {"discovery": 1, "registration": 2}
 LONG_NAMES = {"none": "none", "sig": "signing", "enc": "encryption",
               "front": "frontchannel logout", "back": "backchannel logout",
-              "session": 'session management'}
+              "session": "session management", "rp_init": "rp initiated logout" }
 
 RADIO = '<div class="radio"><label><input type="radio" name="{}" value="{}">{}</label></div>'
 RADIO_C = '<div class="radio"><label><input type="radio" name="{}" value="{}" checked>{}</label></div>'

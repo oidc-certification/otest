@@ -531,6 +531,16 @@ class VerifyAuthnOrErrorResponse(ExpectedError):
     """
     cid = "authn-response-or-error"
     msg = "Expected authentication response or error message"
+    doc = """
+    :param error: The expected error messages
+
+    Example:
+        "authn-response-or-error": {
+          "error": [
+            "request_not_supported"
+          ]
+        }
+    """
 
     def _func(self, conv):
         try:

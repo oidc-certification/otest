@@ -27,6 +27,34 @@ class SetUpError(Exception):
 
 
 def set_request_args(oper, args):
+    """
+    Context:
+        Any
+    Action:
+        Sets a set of request arguments
+    Args:
+        Request arguments
+    Example:
+
+        "set_request_args": {
+          "claims": {
+            "id_token": {
+              "email": {
+                "essential": true
+              }
+            }
+          }
+        }
+
+        "set_request_args": {
+          "scope": [
+            "openid",
+            "offline_access"
+          ],
+          "prompt": "consent"
+        }
+
+    """
     oper.req_args.update(args)
 
 
@@ -35,6 +63,27 @@ def set_response_args(oper, args):
 
 
 def set_op_args(oper, args):
+    """
+    Context:
+        AccessToken, UserInfo
+    Action:
+        Sets a set of operational arguments
+    Args:
+        Operational arguments
+    Example:
+
+        "set_op_args": {
+          "method": "GET",
+          "authn_method": "bearer_header"
+        }
+
+        "set_op_args": {
+          "request_object_signing_alg": "RS256",
+          "request_method": "request"
+        }
+
+    """
+
     oper.op_args.update(args)
 
 
@@ -50,6 +99,16 @@ def set_arg(oper, args):
 
 
 def expect_exception(oper, args):
+    """
+    Context:
+        Registration
+    Action:
+        Verifies that the thrown exception is the one expected.
+    Args:
+        Expected exception
+    Example:
+        "expect_exception": "RegistrationError"
+    """
     set_arg(oper, {'expect_exception': args})
 
 
@@ -82,6 +141,23 @@ def conditional_expect(oper, args):
 
 
 def set_expect_error(oper, args):
+    """
+    Context:
+        Any
+    Action:
+        Sets a number of expected errors and whether the processing should stop or continue.
+    Args:
+        error: List of expected error codes
+        stop: Whether the processing should stop on receiving an error response.
+    Example:
+        "set_expect_error": {
+          "error": [
+            "invalid_grant",
+            "access_denied"
+          ],
+          "stop": false
+        }
+    """
     set_arg(oper, {'expect_error': args})
 
 
@@ -99,6 +175,16 @@ def skip_operation(oper, arg):
 
 
 def conditional_expect_exception(oper, args):
+    """
+    Context:
+        Registration
+    Action:
+        Verifies that the thrown exception is the one expected.
+    Args:
+        Expected exception
+    Example:
+        "expect_exception": "RegistrationError"
+    """
     condition = args["condition"]
     exception = args["exception"]
 
@@ -134,6 +220,21 @@ def clear_cookies(oper, args):
 
 
 def set_uri(oper, args):
+    """
+    Context:
+        Registration
+    Action:
+        Constructs a URI and assigns it to a request argument
+    Args:
+        Tuple with request argument and the path to assigned to a base URL, based of the redirect_uri
+    Example:
+
+        "set_uri": [
+          "tos_uri",
+          "static/tos.html"
+        ]
+
+    """
     ru = oper.conv.get_redirect_uris()[0]
     p = urlparse(ru)
     oper.req_args[args[0]] = "%s://%s/%s" % (p.scheme, p.netloc, args[1])

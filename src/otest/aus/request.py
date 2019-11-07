@@ -347,6 +347,9 @@ class AsyncRequest(Request):
         _conv.events.store(EV_PROTOCOL_RESPONSE, response, ref=ev_index,
                            sender=self.__class__.__name__)
 
+        if "id_token" in response:
+            self.conv.entity.smid2sid[response['id_token']['sid']] = response['state']
+
         display_jwx_headers(response, _conv)
 
         if self.expect_error:

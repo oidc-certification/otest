@@ -348,7 +348,10 @@ class AsyncRequest(Request):
                            sender=self.__class__.__name__)
 
         if "id_token" in response:
-            self.conv.entity.smid2sid[response['id_token']['sid']] = response['state']
+            try:
+                self.conv.entity.smid2sid[response['id_token']['sid']] = response['state']
+            except KeyError:
+                pass
 
         display_jwx_headers(response, _conv)
 

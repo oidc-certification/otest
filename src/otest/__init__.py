@@ -277,3 +277,7 @@ from otest.operation import Operation
 class Done(Operation):
     def run(self, *args, **kwargs):
         self.conv.events.store(EV_END,'')
+
+    def handle_request(self, *args, **kwargs):
+        # If I get here something is seriously wrong
+        raise OperationError('You should never get here. You have gone passed the end of the test sequence')

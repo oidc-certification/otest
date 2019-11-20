@@ -237,10 +237,10 @@ class Operation(object):
         return res
 
     def handle_response(self, *args):
-        raise NotImplemented
+        raise NotImplementedError(self.__class__.__name__)
 
     def handle_request(self, *args, **kwargs):
-        raise NotImplemented
+        raise NotImplementedError(self.__class__.__name__)
 
 
 class Notice(Operation):

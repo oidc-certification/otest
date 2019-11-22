@@ -17,7 +17,9 @@ RP_ORDER = [
     "rp-discovery", "rp-registration", "rp-response_type",
     "rp-response_mode", "rp-token_endpoint", "rp-id_token",
     "rp-claims_request", "rp-request_uri", "rp-scope", "rp-nonce",
-    "rp-key-rotation", "rp-userinfo", "rp-self-issued", "rp-claims"]
+    "rp-key-rotation", "rp-userinfo", "rp-self-issued", "rp-claims",
+    "rp-3rd_party", "rp-backchannel", "rp-frontchannel"
+]
 
 
 OP_ORDER = [

@@ -49,7 +49,6 @@ setup(
         'oic >= 1.1.1',
         'pyjwkest >= 1.4.2',
         'future',
-        'entropy',
         'cherrypy',
         'robobrowser',
         'psutil'
